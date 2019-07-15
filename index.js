@@ -11,6 +11,7 @@ const path = require('path')
 const shell = require('child_process').execSync
 const parser = require('@babel/parser')
 const traverse = require('@babel/traverse').default
+const sprout = require('sprout-data')
 
 const currentPath = process.cwd()
 
@@ -101,7 +102,7 @@ const parseDir = (currentDir) => {
 
 parseDir(targetModulesPath)
 
-const result = Object.keys(importsMap).reduce((acc, cur) => {
+/*const result = Object.keys(importsMap).reduce((acc, cur) => {
     const keys = Object.keys(importsMap[cur])
     cur = cur.replace('/lib/', '/').replace('/src/', '/')
     if (cur.indexOf('tinkoff-form-builder') !== -1) {
@@ -111,6 +112,18 @@ const result = Object.keys(importsMap).reduce((acc, cur) => {
             ]
     }
     return acc
-}, {})
+}, {})*/
+
+let result = {}
+
+Object.keys(importsMap).forEach((cur) => {
+    const keys = Object.keys(importsMap[cur])
+    cur = cur.replace('/lib/', '/').replace('/src/', '/')
+    if (cur.indexOf('tinkoff-form-builder') !== -1) {
+        keys.forEach(key => {
+            result = sprout.assoc(result, [...cur.split('/'), key], true)
+        })
+    }
+})
 
 console.log(JSON.stringify(result, undefined, 2))
