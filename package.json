@@ -11,6 +11,7 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.5.0",
     "@babel/plugin-transform-flow-strip-types": "^7.4.4",
     "@babel/plugin-transform-object-assign": "^7.2.0",
-    "sprout-data": "^1.1.2"
+    "sprout-data": "^1.1.2",
+    "json-stringify-deterministic": "^1.0.1"
   }
 }

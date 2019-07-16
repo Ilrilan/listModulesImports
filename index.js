@@ -12,6 +12,7 @@ const shell = require('child_process').execSync
 const parser = require('@babel/parser')
 const traverse = require('@babel/traverse').default
 const sprout = require('sprout-data')
+const stringify = require('json-stringify-deterministic')
 
 const currentPath = process.cwd()
 
@@ -126,4 +127,4 @@ Object.keys(importsMap).forEach((cur) => {
     }
 })
 
-console.log(JSON.stringify(result, undefined, 2))
+console.log(stringify(result, {space: '  '}))
